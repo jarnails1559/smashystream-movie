@@ -240,7 +240,8 @@
                 return;
             }
 
-            const searchUrl = `http://www.omdbapi.com/?apikey=${omdbApiKey}&s=${encodeURIComponent(query)}&type=movie&r=json`;
+            const searchUrl = `https://www.omdbapi.com/?apikey=${omdbApiKey}&s=${encodeURIComponent(query)}&type=movie&r=json`;
+            console.log('Fetching data from:', searchUrl); // Log the URL
 
             fetch(searchUrl)
                 .then(response => {
@@ -250,6 +251,7 @@
                     return response.json();
                 })
                 .then(data => {
+                    console.log('Data received:', data); // Log received data
                     if (data.Response === "True") {
                         displaySearchResults(data.Search);
                     } else {
@@ -277,6 +279,7 @@
 
         function playMovie(movieId) {
             const streamUrl = `https://player.smashy.stream/movie/${movieId}?s=1&e=1`;
+            console.log('Setting stream URL:', streamUrl); // Log the URL
             document.getElementById('streamFrame').src = streamUrl;
             document.getElementById('movieModal').style.display = 'flex';
         }
